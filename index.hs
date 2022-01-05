@@ -1,5 +1,6 @@
-import Data.List
-import System.IO
+import Data.List ()
+import System.IO ()
+
 
 -- to run ghci compiler you can do ghci and that compiles all changes then do :l {filename} index.hs. this gets you back to main. :r for reload
 -- :t gets the type declaration for what ever you typed in
@@ -8,10 +9,24 @@ import System.IO
 -- :q to quit compiler
 
 
--- main = do
---     putStrLn "Whats your name"
---     name <- getLine
---     putStrLn("hello " ++ name)
+
+
+-- Steps to creating the game
+
+
+-- create the pieces
+data Piece = X | O 
+instance Show Piece where
+    show X = "X"
+    show O = "O"
+
+
+-- create the Board
+data Spot = Used Piece | Unused
+instance Show Spot where
+    show (Used X) = "X"
+    show (Used O) = "O"
+    show Unused = ""
 
 
 data Player = Player {
@@ -21,4 +36,9 @@ data Player = Player {
     -- deriving is used to generate instance(show, eq)
 } deriving(Show)
 
-data Character = X | O 
+
+-- main function in with we will call the other data and also play the game in
+-- main = do
+--     putStrLn "Whats your name"
+--     name <- getLine
+--     putStrLn("hello " ++ name)
