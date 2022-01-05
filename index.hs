@@ -29,6 +29,8 @@ instance Show Spot where
     show Unused = ""
 
 
+
+
 data Player = Player {
     name :: String,
     character :: String,
@@ -37,8 +39,26 @@ data Player = Player {
 } deriving(Show)
 
 
+
+-- align piece and board together so we can tell which spot is used and unused
+-- player switch implementation
+-- player turns, switch player on input submit.
+-- make combo of winning situations
+-- before submitting the input we should check if last player turn wins, if not  check if there are open spots to play
+-- if there is a winning combo, assign winner
+-- Display winner and total wins for the duration of possible (probably not without local storage)
+-- ask if users would like to restart the game
+
 -- main function in with we will call the other data and also play the game in
 -- main = do
 --     putStrLn "Whats your name"
 --     name <- getLine
 --     putStrLn("hello " ++ name)
+
+-- IO action is a piece or pieces of code that waits to be executed like a function basically in JS
+-- main :: IO () 
+
+
+-- type declaration to start the game
+startGame :: [Spot] -> Player -> IO ()
+startGame = undefined 
