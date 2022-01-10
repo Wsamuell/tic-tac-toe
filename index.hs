@@ -106,7 +106,7 @@ exampleBoard = do
 -- if i am able to use the index, i can try to replace value in index with Used X or Used O based on input
 -- PROBLEM - I wont be able to verify if the spot is used or unused so the game logic would be compromised
 
--- the above steps didnt work so i looked into seeing how else i can  implement piece rendering code. after much review i watched a couple of videos and read haskell code which i have linked in the README and decided i can just make a list of index based on the pieces and spots available 
+-- the above steps didn't work so i looked into seeing how else i can  implement piece rendering code. after much review i watched a couple of videos and read haskell code which i have linked in the README and decided i can just make a list of index based on the pieces and spots available 
 
 -- check if the current spot a player takes is valid or invalid
 
@@ -145,7 +145,7 @@ switchPlayer X = O
 
 -- Now we need to ask for user input and then assign Spot as requested
 newGame :: Piece -> [Spot] -> IO()
-newGame  piece spot = do 
+newGame  piece spot = do
     putStrLn ("Player " ++ show piece ++ " please make a move")
     exampleBoard
     putStr( "\nPlayer " ++ show piece ++ "'s turn (CASE SENSITIVE): ")
@@ -156,29 +156,34 @@ newGame  piece spot = do
 -- i need to find a way to have renderBoard display the move i played and then make sure the spot is removed from the board so it cant be used twice
 
         Invalid err spot -> do
+            putStrLn $ replicate 1 '\n' 
             putStrLn err
+            putStrLn $ replicate 1 '\n' 
             newGame piece spot
 -- before submitting the input we should check if last player turn wins, if not  check if there are open spots to play
         Valid gameBoard -> do
--- if there are no spots left, render tied game and restart 
-            if checkTie piece gameBoard then do 
-                putStrLn "Tied Game"
-                restart
-            else if checkWinner piece gameBoard then do
+            if checkWinner piece gameBoard then do
 -- if there is a winning combo, assign winner
                 putStrLn ("Player " ++ show piece ++ " Wins the Game!" )
                 putStrLn $ replicate 1 '\n'
                 renderBoard gameBoard
                 restart
+-- if there are no spots left, render tied game and restart 
+-- i seem to not understand how to use my already made spot to tell when all spots are filled
+            else if checkTie piece gameBoard then do
+                putStrLn $ replicate 1 '\n'
+                putStrLn "Tied Game <><><><><><> No Spaces Left!"
+                restart
             else do
+                putStrLn $ replicate 1 '\n'
                 renderBoard gameBoard
                 newGame (switchPlayer piece) gameBoard
 
--- check tie game. checks if all the spots are filled with used 
+-- check tie game. checks if all the spots are filled with used piece instead of Unused
 checkTie :: Piece -> [Spot] -> Bool 
-checkTie piece spot = 
+checkTie piece  spot = 
     or [
-        head spot == Used piece && spot !! 1 == Used piece && spot !! 2 == Used piece && spot !! 3 == Used piece && spot !! 4 == Used piece && spot !! 5 == Used piece && spot !! 6 == Used piece && spot !! 7 == Used piece && spot !! 8 == Used piece
+        head spot /= Unused && spot !! 1 /= Unused && spot !! 2 /= Unused && spot !! 3 /= Unused && spot !! 4 /= Unused && spot !! 5 /= Unused && spot !! 6 /= Unused && spot !! 7 /= Unused && spot !! 8 /= Unused
     ]
 
 -- make combo of winning situations
@@ -231,7 +236,7 @@ restart = do
 -- main :: IO () 
 
 
--- type declaration to start the game
+-- declaration to start the game
 main :: IO()
 main = do 
     welcomeInfo

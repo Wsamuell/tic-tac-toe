@@ -1,6 +1,9 @@
 # Tic-Tac-Toe
 
-Tic-tac-toe game designed with CLI &amp; Haskell
+Tic-tac-toe game designed In the command Line using Haskell
+A 2 person Local multiplayer Game
+
+### Running Instructions
 
 ### Haskell for Beginners tips i learned
 
