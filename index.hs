@@ -40,7 +40,7 @@ instance Eq Spot where
 
 -- create the Board 
 
--- i believe the best implementation of this from my end would be to use the take 3 method in haskell and use it to make an array pf an array fo that way we can have 9 number  in 3 different arrays like 
+-- i believe the best implementation of this from my end would be to use the take 3 method in haskell and use it to make an array of an array of that way we can have 9 number  in 3 different arrays like 
 -- [1,2..9]
 -- and then take 3 (something like this)
 
@@ -61,7 +61,7 @@ data PlayerMove = Valid [Spot] | Invalid String [Spot]
 
 -- in between each line, add a separating |
 boardBlock ::  [Spot] -> String
-boardBlock block = intercalate "  | " $ map show block
+boardBlock spot = intercalate "  | " $ map show spot
 
 divider :: String 
 divider = "---+----+---"
